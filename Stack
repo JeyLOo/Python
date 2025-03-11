@@ -1,0 +1,67 @@
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class Stack:
+    def __init__(self):
+        self.top = None  
+
+    def is_empty(self):
+        return self.top is None  
+
+    def push(self, data):
+        new_node = Node(data)  
+        new_node.next = self.top 
+        self.top = new_node  
+        print(f"{data} pushed to stack.\n")
+
+    def pop(self):
+        if self.is_empty():
+            print("Stack is empty.\n")
+            return None
+        popped_data = self.top.data  
+        self.top = self.top.next  
+        print(f"{popped_data} popped from stack.\n")
+        return popped_data
+    
+    def peek(self):
+        if self.is_empty():
+            print("Stack is empty.\n")
+            return None
+        print(f"Top element is: {self.top.data}\n")
+        return self.top.data  
+
+    def traverse(self):
+        if self.is_empty():
+            print("Stack is empty.\n")
+            return
+        current = self.top
+        stack_elements = []
+        while current:
+            stack_elements.append(str(current.data))  
+            current = current.next
+        print(f"[{', '.join(stack_elements)}] \n")
+
+def menu():
+    stack = Stack()
+    
+    while True:
+        print("Menu: \n1.) Traverse \n2.) Push \n3.) Pop \n4.) Peek")
+     
+        choice = int(input("Enter your choice: "))
+        
+        if choice == 1:
+            stack.traverse()
+        elif choice == 2:
+            for i in range (1,6):
+                data = input("Enter data number {i} to push onto the stack: ")
+                stack.push(data)
+        elif choice == 3:
+            stack.pop()
+        elif choice == 4:
+            stack.peek()
+        else:
+            print("Invalid choice. Please try again.")
+
+menu()
